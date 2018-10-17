@@ -1,0 +1,114 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<link rel="stylesheet" href="css/main.css" type="text/css" /> 
+
+<title>Fomin Vlad, IP-71 (lab2)</title>
+</head>
+<body>
+
+<div>
+	<form name="formCoords" action="" onsubmit="coords()" method="post">
+		<label>Введите координаты точек:</label><br/>
+		<input type="text" name="x1" placeholder="x1"/>
+		<input type="text" name="y1" placeholder="y1"/><br/>
+		<input type="text" name="x2" placeholder="x2"/>
+		<input type="text" name="y2" placeholder="y2"/><br/>
+		<input type="text" name="x3" placeholder="x3"/>
+		<input type="text" name="y3" placeholder="y3"/><br/>
+		<input type="submit" name="input" value="Ввести"/>
+	</form>
+</div>
+
+<div id="result1"></div>
+
+
+<script>
+	
+	
+	let arr = [3, 2, 7, 5, 0, 8];
+	
+	let arr2 = [2, 4, 2];
+	let sq;
+	/*
+	function square (arr) {
+		let x1=arr[0], x2=arr[2], x3=arr[4], y1=arr[1], y2=arr[3], y3=arr[5];
+		let square1 = 0.5 * (((x1 - x3) * (y2 - y3)) - ((y1 - y3) * (x2 - x3)));
+		if (square1 < 0) {
+			square1 = -square1;
+		}
+		return square1;
+	}
+	
+	function makeArrCoords (arr) {
+		arr3[0] = document.forms["formCoords"]["x1"].value;
+		arr3[1] = document.forms["formCoords"]["y1"].value;
+		arr3[2] = document.forms["formCoords"]["x2"].value;
+		arr3[3] = document.forms["formCoords"]["y2"].value;
+		arr3[4] = document.forms["formCoords"]["x3"].value;
+		arr3[5] = document.forms["formCoords"]["y3"].value;
+		square(arr3);
+		return arr3;
+	}
+	*/
+	function coords () {
+		let arr3 = [];
+		arr3[0] = document.forms["formCoords"]["x1"].value;
+		arr3[1] = document.forms["formCoords"]["y1"].value;
+		arr3[2] = document.forms["formCoords"]["x2"].value;
+		arr3[3] = document.forms["formCoords"]["y2"].value;
+		arr3[4] = document.forms["formCoords"]["x3"].value;
+		arr3[5] = document.forms["formCoords"]["y3"].value;
+		let square1 = 0.5 * (((arr3[0] - arr3[4]) * (arr3[3] - arr3[5])) - ((arr3[1] - arr3[5]) * (arr3[2] - arr3[4])));
+		if (square1 < 0) {
+			square1 = -square1;
+		}
+		
+		document.getElementById("result1").innerHTML = square1;
+		return square1;
+	}
+
+	
+	function max(arr) {
+		let counter = 0;
+		let maxNum = arr[0];
+
+		for (let i = 0; i < arr.length; i++) {	
+			if (maxNum < arr[i+1]) {
+				maxNum = arr[i + 1];
+			}
+		}
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i] == maxNum) {
+				counter++;
+			}
+		}
+		document.write("Max num: " + maxNum + ". Counter: " + counter);
+		return counter;
+	}
+	
+	function triangle(arr) {
+		if (arr[0] + arr[1] == arr[2]) {
+			return false;
+		}
+		else if (arr[0] + arr[2] == arr[1]) {
+			return false;
+		}
+		else if (arr[1] + arr[2] == arr[0]) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	//alert(triangle(arr2));
+	//square(arr);
+	let a = max(arr);
+	//document.getElementById("result1").innerHTML = a;
+		
+</script>
+
+
+</body>
+</html> 
