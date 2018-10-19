@@ -6,9 +6,41 @@
 <title>Fomin Vlad, IP-71 (lab2)</title>
 </head>
 <body>
-
+<style>
+table, th, td {
+    border: 3px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 150px;
+    text-align: left;    
+}
+.slideshow {
+	width: 300px;
+	position: relative;
+}
+.dot {
+	cursor: pointer;
+	height: 13px;
+	width: 13px;
+	margin: 0 2px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+}
+.active, .dot:hover {
+	background-color: #717171;
+}
+.fade {
+	-webkit-animation-name: fade;
+	-webkit-animation-duration:1.5s;
+	animation-name:fade;
+	animation-duration:1.5s;
+}
+</style>
 <div>
-	<form name="formCoords" action="" onsubmit="coords()" method="post">
+	<form  name="formCoords" action=""   method="post">
 		<label>Введите координаты точек:</label><br/>
 		<input type="text" name="x1" placeholder="x1"/>
 		<input type="text" name="y1" placeholder="y1"/><br/>
@@ -16,41 +48,252 @@
 		<input type="text" name="y2" placeholder="y2"/><br/>
 		<input type="text" name="x3" placeholder="x3"/>
 		<input type="text" name="y3" placeholder="y3"/><br/>
+		<input id="formCoords" type="submit" name="input" value="Ввести"/>
+	</form>
+</div>
+
+<div>
+	<form name="dataswap" action=""  method="post">
+		<label>Введите данные:</label><br/>
+		<input type="text" name="data1" placeholder="Данные 1"/>
+		<input type="text" name="data2" placeholder="Данные 2"/>
+		<input id="dataswap" type="submit" name="input" value="Ввести"/>
+	</form>
+</div>
+
+<div>
+	<form name="numbers" action="" onsubmit="maxNum(); return false;" method="post">
+		<label>Введите ваши числа:</label><br/>
+		<input type="text" name="num1" placeholder="Число 1"/>
+		<input type="text" name="num2" placeholder="Число 2"/>
+		<input type="text" name="num3" placeholder="Число 3"/>
+		<input type="text" name="num4" placeholder="Число 4"/>
+		<input type="text" name="num5" placeholder="Число 5"/>
 		<input type="submit" name="input" value="Ввести"/>
 	</form>
 </div>
 
-<div id="result1"></div>
+<div>
+	<form name="lengths" action="" onsubmit="triangle(); return false;" method="post">
+		<label>Введите стороны треугольника:</label><br/>
+		<input type="text" name="len1" placeholder="Длинна a"/>
+		<input type="text" name="len2" placeholder="Длинна b"/>
+		<input type="text" name="len3" placeholder="Длинна c"/>
+		<input type="submit" name="input" value="Ввести"/>
+	</form>
+</div>
 
+<div><p>Площадь треугольника: </p><div id="result1"></div></div>
+<div><p>Измененные местами значения: </p><div id="result2"></div></div>
+<div><p>Количество максимальных чисел: </p><div id="result3"></div></div>
+<div><p>Возможно ли построить треугольник?: </p><div id="result4"></div></div>
+
+<img src="js.png" onMouseMove="onMoveImg(this.style);"  onMouseOut="onOutImg(this.style);" style="heigth: 300px; width:300px;">
+
+<div id="hrUp"></div>
+<div>
+	<form name="hr" action="" method="post">
+		<label>Нажмите на кнопку:</label><br/>
+		<input type="submit" onclick="hrUp(); return false;" name="up" value="Вверх"/>
+		<input type="submit" onclick="hrDown(); return false;" name="down" value="Вниз"/>
+		<input type="submit" onclick="sizeUpp(); return false;" name="sizeUp" value="Жирнее"/>
+		<input type="submit" onclick="sizeDownn(); return false;" name="sizeDown" value="Худее"/>
+		<input type="submit" onclick="moreUpp(); return false;" name="moreUp" value="Шире"/>
+		<input type="submit" onclick="moreDownn(); return false;" name="moreDown" value="Уже"/>
+	</form>
+</div>
+<div id="hrDown"></div>
+
+<form name="courses" action="" onsubmit="course(); return false;" method="post">
+<label>Выберите курс: </label>
+<select id="courseName">
+	<option value="0">---</option>
+	<option value="1">Математика</option>
+	<option value="2">Английский</option>
+	<option value="3">Психология</option>
+</select>
+
+<label>Выберите длительность курса: </label>
+<select id="courseTime">
+	<option value="0">---</option>
+	<option value="3">3 месяца</option>
+	<option value="6">6 месяцев</option>
+	<option value="12">12 месяцев</option>
+</select>
+
+<label>Выберите язык преподования курса: </label>
+<select id="courseLen">
+	<option value="0">---</option>
+	<option value="1">Русский</option>
+	<option value="2">Английский</option>
+</select>
+
+<label>Выберите форму отчетности: </label>
+<select id="courseForm">
+	<option value="0">---</option>
+	<option value="1">Письменная</option>
+	<option value="2">Устная</option>
+</select>
+	<input type="submit" name="input" value="Ввести"/>
+</form>
+<div id="courseDiv"><div>
+	
+	
+<div>
+	<form name="img" action="" method="post">
+		<label>Нажмите на картинку:</label><br/>
+		<select id="tableSelect">
+		<option value="0">---</option>
+		<option value="1"/>JS</option>
+		<option value="2"/>HTML</option>
+		<option value="3"/>CSS</option>
+		</select>
+		<input type="submit" id="all" onclick="allTable(); return false;" value="Для всей таблицы"/>
+		<input type="submit" id="every" onclick="everyTable(); return false;" value="Для каждой клеточки"/>
+	</form>
+</div>
+
+<div>
+	<table id="table">
+		<tr>
+			<td id="td1"></td>
+			<td id="td2"></td>
+		</tr>
+		<tr>
+			<td id="td3"></td>
+			<td id="td4"></td>
+		</tr>		
+	</table>
+</div>
+
+<div>
+	<form id="goods" action="" onsubmit="goods(); return false;" method="post">
+		<label>Выберите товар:</label><br/>
+		<p><input id="g1" type="checkbox" name="good" value="1"/>Хлеб (булка)</p>
+		<input id="check1" type="text" placeholder="Введите кол-во"/><br>
+		<p><input id="g2" type="checkbox" name="good" value="2"/>Колбаска (палка)</p>
+		<input id="check2" type="text" placeholder="Введите кол-во"/><br>
+		<p><input id="g3" type="checkbox" name="good" value="3"/>Сыр (упаковка)</p>
+		<input id="check3" type="text" placeholder="Введите кол-во"/><br>
+		<p><input id="g4" type="checkbox" name="good" value="4"/>Печенье (упаковка)</p>
+		<input id="check4" type="text" placeholder="Введите кол-во"/><br>
+		<p><input id="g5" type="checkbox" name="good" value="5"/>Чай (упаковка)</p>
+		<input id="check5" type="text" placeholder="Введите кол-во"/><br>
+		<p><input id="g6" type="checkbox" name="good" value="6"/>Лимонад (бутылка)</p>
+		<input id="check6" type="text" placeholder="Введите кол-во"/><br>
+		<input type="submit" id="every" value="В корзину"/>
+	</form>
+</div>
+<div id="goodsDiv"></div>
+
+<div>
+	<form  name="sliceNumber" action="" onsubmit="sliceNum(); return false;" method="post">
+		<label>Введите число для "переворачивания":</label>
+		<input type="text" id="num1" placeholder="Ваше число"/>
+		<input id="numSubmit" type="submit" value="Ввести"/>
+	</form>
+</div>
+<div id="sliceDiv"></div>
+
+<div>
+	<form  name="dilnNumber" action="" onsubmit="dilNum(); return false;" method="post">
+		<label>Введите число для того, что бы узнать его делители:</label>
+		<input type="text" id="num2" placeholder="Ваше число"/>
+		<input id="dilSubmit" type="submit" value="Ввести"/>
+	</form>
+</div>
+<div id="dilDiv"></div>
+
+<div>
+	<label>Узнайте количество "счастливых билетиков":</label>
+	<input id="countNumbers" type="submit" onclick="countNum(); return false;" value="Узнать"/>
+</div>
+<div id="countDiv"></div>
+
+<div>
+	<form  name="weekNum" action="" onsubmit="weekNumber(); return false;" method="post">
+		<label>Введите дату в формате:</label>
+		<input type="text" id="myDate" placeholder="Число.Месяц.Год"/>
+		<input id="weekSubmit" type="submit" value="Ввести"/>
+		<a href="https://planetcalc.ru/1252/">Проверяй результат тут!</a>
+	</form>
+</div>
+<div id="weekDiv"></div>
+
+<div>
+	<form  name="myText" action="" onsubmit="countWords(); return false;" method="post">
+		<label>Введите вашь текст:</label>
+		<input type="text" id="myTxt" placeholder="Место для текста" style="width: 300; height: 180;"/>
+		<input id="txtSubmit" type="submit" value="Ввести"/>
+	</form>
+</div>
+<div id="txtDiv"></div>
+
+<div class="slideshow">
+	<div class="mySlides fade">
+		<img src="js.png" style="width:300; height:300;">
+	</div>
+	<div class="mySlides fade">
+		<img src="html.png" style="width:300; height:300;">
+	</div>
+	<div class="mySlides fade">
+		<img src="css.png" style="width:300; height:300;">
+	</div>
+
+	
+	<div style="text-align: center;">
+		<span class="dot" onclick="currentSlide(1)"></span>
+		<span class="dot" onclick="currentSlide(2)"></span>
+		<span class="dot" onclick="currentSlide(3)"></span>
+	</div>
+</div>
+
+<div>
+	<form  name="email" action="" onsubmit="mail(); return false;" method="post">
+		<label>Введите вашь текст:</label>
+		<input type="text" id="myEmail" placeholder="Введите вашу почту." style="width: 300;"/>
+		<input id="emailSubmit" type="submit" value="Ввести"/>
+	</form>
+</div>
+<div id="emailDiv"></div>
 
 <script>
-	
-	
-	let arr = [3, 2, 7, 5, 0, 8];
-	
-	let arr2 = [2, 4, 2];
-	let sq;
-	/*
-	function square (arr) {
-		let x1=arr[0], x2=arr[2], x3=arr[4], y1=arr[1], y2=arr[3], y3=arr[5];
-		let square1 = 0.5 * (((x1 - x3) * (y2 - y3)) - ((y1 - y3) * (x2 - x3)));
-		if (square1 < 0) {
-			square1 = -square1;
-		}
-		return square1;
-	}
-	
-	function makeArrCoords (arr) {
+	//onsubmit="coords(); return false;"
+
+	formCoords.onfocus = function() {
+		let arr3 = [];
 		arr3[0] = document.forms["formCoords"]["x1"].value;
 		arr3[1] = document.forms["formCoords"]["y1"].value;
 		arr3[2] = document.forms["formCoords"]["x2"].value;
 		arr3[3] = document.forms["formCoords"]["y2"].value;
 		arr3[4] = document.forms["formCoords"]["x3"].value;
 		arr3[5] = document.forms["formCoords"]["y3"].value;
-		square(arr3);
+		let square1 = 0.5 * (((arr3[0] - arr3[4]) * (arr3[3] - arr3[5])) - ((arr3[1] - arr3[5]) * (arr3[2] - arr3[4])));
+		if (square1 < 0) {
+			square1 = -square1;
+		}
+		document.getElementById("result1").innerHTML = square1;
+		return false;
+	}
+
+	//onsubmit="swap(); return false;"
+	
+	dataswap.onblur = function() {
+		let arr3 = [];
+		arr3[0] = document.forms["dataswap"]["data1"].value;
+		arr3[1] = document.forms["dataswap"]["data2"].value;
+		let tmp = arr3[0];
+		arr3[0] = arr3[1];
+		arr3[1] = tmp;
+		document.getElementById("result2").innerHTML = "Данные 1: " + arr3[0] + "Данные 2: " + arr3[1];
 		return arr3;
 	}
-	*/
+
+	
+	let arr = [3, 2, 7, 5, 0, 8];
+	
+	let arr2 = [2, 4, 2];
+	/*
 	function coords () {
 		let arr3 = [];
 		arr3[0] = document.forms["formCoords"]["x1"].value;
@@ -63,50 +306,420 @@
 		if (square1 < 0) {
 			square1 = -square1;
 		}
-		
 		document.getElementById("result1").innerHTML = square1;
 		return square1;
 	}
-
+	*/
+	function swap() {
+		let arr3 = [];
+		arr3[0] = document.forms["dataswap"]["data1"].value;
+		arr3[1] = document.forms["dataswap"]["data2"].value;
+		let tmp = arr3[0];
+		arr3[0] = arr3[1];
+		arr3[1] = tmp;
+		document.getElementById("result2").innerHTML = "Данные 1: " + arr3[0] + "Данные 2: " + arr3[1];
+		return arr3;
+	}
 	
-	function max(arr) {
+	function maxNum() {
+		let arr3 = [];
+		arr3[0] = document.forms["numbers"]["num1"].value;
+		arr3[1] = document.forms["numbers"]["num2"].value;
+		arr3[2] = document.forms["numbers"]["num3"].value;
+		arr3[3] = document.forms["numbers"]["num4"].value;
+		arr3[4] = document.forms["numbers"]["num5"].value;
 		let counter = 0;
-		let maxNum = arr[0];
+		let maxNum = arr3[0];
 
-		for (let i = 0; i < arr.length; i++) {	
-			if (maxNum < arr[i+1]) {
-				maxNum = arr[i + 1];
+		for (let i = 0; i < arr3.length; i++) {	
+			if (maxNum < arr3[i+1]) {
+				maxNum = arr3[i + 1];
 			}
 		}
-		for (let i = 0; i < arr.length; i++) {
-			if (arr[i] == maxNum) {
+		for (let i = 0; i < arr3.length; i++) {
+			if (arr3[i] == maxNum) {
 				counter++;
 			}
 		}
-		document.write("Max num: " + maxNum + ". Counter: " + counter);
+		document.getElementById("result3").innerHTML = counter;
 		return counter;
 	}
 	
-	function triangle(arr) {
-		if (arr[0] + arr[1] == arr[2]) {
-			return false;
-		}
-		else if (arr[0] + arr[2] == arr[1]) {
-			return false;
-		}
-		else if (arr[1] + arr[2] == arr[0]) {
+	function triangle() {
+		let arr3 = [];
+		arr3[0] = document.forms["lengths"]["len1"].value;
+		arr3[1] = document.forms["lengths"]["len2"].value;
+		arr3[2] = document.forms["lengths"]["len3"].value;
+		arr3[0] = +arr3[0];
+		arr3[1] = +arr3[1];
+		arr3[2] = +arr3[2];
+		if (arr3[0] + arr3[1] <= arr3[2] || arr3[0] + arr3[2] <= arr3[1] || arr3[1] + arr3[2] <= arr3[0]) {
+			document.getElementById("result4").innerHTML = "НЕВОЗМОЖНО построить такой треугольник!";
 			return false;
 		}
 		else {
+			document.getElementById("result4").innerHTML = "ВОЗМОЖНО построить такой треугольник!";
 			return true;
 		}
 	}
 	
-	//alert(triangle(arr2));
-	//square(arr);
-	let a = max(arr);
-	//document.getElementById("result1").innerHTML = a;
+	function onMoveImg(obj){
+		obj.height = "500px";
+		obj.width = "500";
+	}
+	
+	function onOutImg(obj){
+		obj.height = "300";
+		obj.width = "300";
+	}
+	
+	function hrUp() {
+		document.getElementById("hrUp").innerHTML = "<hr id=\"myHr\">";
+		document.getElementById("hrDown").innerHTML = "";
+	}
+	
+	function hrDown() {
+		document.getElementById("hrUp").innerHTML = "";
+		document.getElementById("hrDown").innerHTML = "<hr id=\"myHr\">";
+	}
+	
+	function sizeUpp() {
+		let obj = document.getElementById("myHr");
+		obj.size = "15px";
+		return obj;
+	}
+	
+	function sizeDownn() {
+		let obj = document.getElementById("myHr");
+		obj.size = "1px";
+		return obj;
+	}
+	
+	function moreUpp() {
+		let obj = document.getElementById("myHr");
+		obj.width = "100%";
+		return obj;
+	}
+	
+	function moreDownn() {
+		let obj = document.getElementById("myHr");
+		obj.width = "50%";
+		return obj;
+	}
+	
+	function course() {
+		let name = document.getElementById("courseName").value;
+		let time = document.getElementById("courseTime").value;
+		let language = document.getElementById("courseLen").value;
+		let form = document.getElementById("courseForm").value;
+		if (name == 0 || time == 0 || language == 0 || form == 0) {
+			document.getElementById("courseDiv").innerHTML = "Ошибка! Введите все данные!";
+		}
+		else {
+			let resultSumm = 0;
+			if (name == 1) {
+				if (time == 3) {
+					resultSumm += 50;
+				}
+				else if (time == 6) {
+					resultSumm += 90;
+				}
+				else if (time == 12) {
+					resultSumm += 150;
+				}
+				if (language == 2) {
+					resultSumm += 60;
+				}
+				if (form == 1) {
+					resultSumm += 30;
+				}
+				else if (form == 2) {
+					resultSumm += 10;
+				}
+			}
+			else if (name == 2) {
+				if (time == 3) {
+					resultSumm += 30;
+				}
+				else if (time == 6) {
+					resultSumm += 50;
+				}
+				else if (time == 12) {
+					resultSumm += 90;
+				}
+				if (language == 2) {
+					resultSumm += 20;
+				}
+				if (form == 1) {
+					resultSumm += 30;
+				}
+				else if (form == 2) {
+					resultSumm += 10;
+				}
+			}
+			else if(name == 3) {
+				if (time == 3) {
+					resultSumm += 35;
+				}
+				else if (time == 6) {
+					resultSumm += 55;
+				}
+				else if (time == 12) {
+					resultSumm += 99;
+				}
+				if (language == 2) {
+					resultSumm += 80;
+				}
+				if (form == 1) {
+					resultSumm += 30;
+				}
+				else if (form == 2) {
+					resultSumm += 10;
+				}
+			}
+			document.getElementById("courseDiv").innerHTML = "Курс по выбранным вами параметрам будет стоить вам " + resultSumm + "$.";
+		}
+	}
+	
+	function allTable() {
+		let image = document.getElementById("tableSelect").value;
+		let tableObj = document.getElementById("table");
+		if (image == 0) {
+			tableObj.style.background = "";
+		}
+		else if (image == 1) {
+			tableObj.style.background = "url(\"js.png\")";
+		}
+		else if (image == 2) {
+			tableObj.style.background = "url(\"html.png\")";
+		}
+		else if (image == 3) {
+			tableObj.style.background = "url(\"css.png\")";
+		}
+	}
+	
+	function everyTable() {
+		let image = document.getElementById("tableSelect").value;
+		let tableObj1 = document.getElementById("td1");
+		let tableObj2 = document.getElementById("td2");
+		let tableObj3 = document.getElementById("td3");
+		let tableObj4 = document.getElementById("td4");
+		if (image == 0) {
+			tableObj1.style.background = "";
+			tableObj2.style.background = "";
+			tableObj3.style.background = "";
+			tableObj4.style.background = "";
+		}
+		else if (image == 1) {
+			tableObj1.style.background = "url(\"js2.png\")";
+			tableObj2.style.background = "url(\"js2.png\")";
+			tableObj3.style.background = "url(\"js2.png\")";
+			tableObj4.style.background = "url(\"js2.png\")";
+		}
+		else if (image == 2) {
+			tableObj1.style.background = "url(\"html2.png\")";
+			tableObj2.style.background = "url(\"html2.png\")";
+			tableObj3.style.background = "url(\"html2.png\")";
+			tableObj4.style.background = "url(\"html2.png\")";
+		}
+		else if (image == 3) {
+			tableObj1.style.background = "url(\"css2.png\")";
+			tableObj2.style.background = "url(\"css2.png\")";
+			tableObj3.style.background = "url(\"css2.png\")";
+			tableObj4.style.background = "url(\"css2.png\")";
+		}
+	}
+	
+	function goods() {
+		let g1 = document.getElementById('g1').checked;
+		let g2 = document.getElementById('g2').checked;
+		let g3 = document.getElementById('g3').checked;
+		let g4 = document.getElementById('g4').checked;
+		let g5 = document.getElementById('g5').checked;
+		let g6 = document.getElementById('g6').checked;
+		let c1 = parseInt(document.getElementById('check1').value, 10);
+		let c2 = parseInt(document.getElementById('check2').value, 10);
+		let c3 = parseInt(document.getElementById('check3').value, 10);
+		let c4 = parseInt(document.getElementById('check4').value, 10);
+		let c5 = parseInt(document.getElementById('check5').value, 10);
+		let c6 = parseInt(document.getElementById('check6').value, 10);
+		let cost = 0;
+		if (g1) {
+			if (isNaN(c1)) {
+				document.getElementById("goodsDiv").innerHTML = "Ошибка! Введите число!";
+				return;
+			}
+			else {
+				cost += c1 * 10;
+			}
+		}
+		if (g2) {
+			if (isNaN(c2)) {
+				document.getElementById("goodsDiv").innerHTML = "Ошибка! Введите число!";
+				return;
+			}
+			else {
+				cost += c2 * 65;
+			}
+		}
+		if (g3) {
+			if (isNaN(c3)) {
+				document.getElementById("goodsDiv").innerHTML = "Ошибка! Введите число!";
+				return;
+			}
+			else {
+				cost += c3 * 40;
+			}
+		}
+		if (g4) {
+			if (isNaN(c4)) {
+				document.getElementById("goodsDiv").innerHTML = "Ошибка! Введите число!";
+				return;
+			}
+			else {
+				cost += c4 * 20;
+			}
+		}
+		if (g5) {
+			if (isNaN(c5)) {
+				document.getElementById("goodsDiv").innerHTML = "Ошибка! Введите число!";
+				return;
+			}
+			else {
+				cost += c5 * 80;
+			}
+		}
+		if (g6) {
+			if (isNaN(c6)) {
+				document.getElementById("goodsDiv").innerHTML = "Ошибка! Введите число!";
+				return;
+			}
+			else {
+				cost += c6 * 17;
+			}
+		}
+		document.getElementById("goodsDiv").innerHTML = "Вы положили в корзину товаров на " + cost + " грн.";
+	}
+
+	function sliceNum() {
+		let myNum = document.getElementById("num1").value;
+		let arr = String(myNum).split("");
+		arr = arr.reverse();
+		myNum = +arr.join("");
+		if (isNaN(myNum)) {
+			document.getElementById("sliceDiv").innerHTML = "Ошибка!Введите число!";
+		}
+		else {
+			document.getElementById("sliceDiv").innerHTML = "Ваше перевёрнутое число: " + myNum;
+		}
+	}
+	
+	function dilNum() {
+		let myNum = parseInt(document.getElementById("num2").value, 10);
+		let arr = [];
+		if (isNaN(myNum)) {
+			document.getElementById("dilDiv").innerHTML = "Ошибка! Введите число!";
+			return;
+		}
+		else {
+			for (let i = myNum; i >= 0; i--) {
+				if(myNum % i == 0) {
+					arr.push(i);
+				}
+			}
+			arr.reverse();
+			document.getElementById("dilDiv").innerHTML = "Делители вашего числа: " + arr;
+		}
+	}
+	
+	function countNum() {
+		let counter = 0;
+		let arr = [];
+		for (let i = 100000; i < 1000000; i++) {
+			arr = String(i).split("");
+			if (arr[0] + arr[1] + arr[2] == arr[3] + arr[4] + arr[5]) {
+				counter++;
+			}
+		}
+		document.getElementById("countDiv").innerHTML = "Количество счастливых билетиков: " + counter;
+	}
+	
+	function weekNumber() {
+		myDate = document.getElementById("myDate").value;
+		let arr = myDate.split(".");
+		if(arr[0] <= 0 || arr[1] <= 0 || arr[2] < 0 || arr[0] > 31 || arr[1] > 12) {
+			document.getElementById("weekDiv").innerHTML = "Ошибка! Введите адекватную дату!";
+			return;
+		}
+		function isInteger(num) {
+			return (num ^ 0) == num;
+		}
+		let currentDateTime = new Date(arr[2], arr[1] - 1, arr[0]);
+		let pastTimeOfStartCurrentYear = currentDateTime - new Date(arr[2], 0, 1);
+		let hourOfMillisecs = 3600000;
+		let hoursOfOneWeek = 168;
 		
+		myDate = (pastTimeOfStartCurrentYear / hourOfMillisecs / hoursOfOneWeek).toFixed(2);
+
+		if (isInteger(myDate)) {
+			document.getElementById("weekDiv").innerHTML = "Сейчас " + ((pastTimeOfStartCurrentYear / hourOfMillisecs / hoursOfOneWeek) + 1) + " неделя";
+		}
+		else {
+			document.getElementById("weekDiv").innerHTML = "Сейчас " + Math.ceil(pastTimeOfStartCurrentYear / hourOfMillisecs / hoursOfOneWeek) + " неделя";
+		}
+		
+	}
+	
+	function countWords() {
+		let arr = document.getElementById("myTxt").value.split(" ");
+		let arr2 = [];
+		for (let i = 0; i < arr.length; i++) {
+			if(arr[i] != "") {
+				arr2.push(arr[i]);
+			}
+		}
+		document.getElementById("txtDiv").innerHTML = "Количество слов в тексте: " + arr2.length;
+	}
+	
+	let slideIndex = 1;
+	showSlides(slideIndex);
+	function plusSlides(n) {
+		showSlides(slideIndex += n);
+	}
+	function currentSlide(n) {
+		showSlides(slideIndex = n);
+	}
+	function showSlides(n) {
+		let i;
+		let slides = document.getElementsByClassName("mySlides");
+		let dots = document.getElementsByClassName("dot");
+		
+		if (n > slides.length) {
+			slideIndex = 1;
+		}
+		if (n < 1) {
+			slideIndex = slides.length;
+		}
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+		}
+		for (i = 0; i < dots.length; i++) {
+			dots[i].className = dots[i].className.replace("active", "");
+		}
+		slides[slideIndex-1].style.display = "block";
+		dots[slideIndex-1].className += " active";
+	}
+	
+	function mail() {
+		let str = document.getElementById("myEmail").value;
+		let r = /^\w+@\w+\.\w{2,4}$/i;
+		if (str.search(r)) {
+			document.getElementById("emailDiv").innerHTML = "Ошибка! Введите корректный E-mail!";
+		}
+		else {
+			document.getElementById("emailDiv").innerHTML = "Вы можете использовать данный E-mail!";
+		}
+	}
 </script>
 
 
