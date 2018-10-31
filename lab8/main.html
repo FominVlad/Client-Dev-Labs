@@ -340,7 +340,8 @@ th, td {
 			if (arr3[i] == maxNum) {
 				counter++;
 			}
-		}
+		alert ("Counter" + counter);
+			}
 		document.getElementById("result3").innerHTML = counter;
 		return counter;
 	}
@@ -635,8 +636,26 @@ th, td {
 	function countNum() {
 		let counter = 0;
 		let arr = [];
+		for (let i = 100000; i >= 0; i--) {
+			arr = String(i).split("");
+			if (i != 100000) {
+				for(let j = 0; j < 10; j++) {
+					arr[5] = j;
+				}
+			}
+			for (let j = 0; j < arr.length; j++) {
+				arr[j] = +arr[j];
+			}
+			//alert(arr);
+			if (arr[0] + arr[1] + arr[2] == arr[3] + arr[4] + arr[5]) {
+				counter++;
+			}
+		}
 		for (let i = 100000; i < 1000000; i++) {
 			arr = String(i).split("");
+			for (let j = 0; j < arr.length; j++) {
+				arr[j] = +arr[j];
+			}
 			if (arr[0] + arr[1] + arr[2] == arr[3] + arr[4] + arr[5]) {
 				counter++;
 			}

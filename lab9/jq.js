@@ -1,0 +1,12 @@
+$('table:first td').html("<p>текст у клітинці</p>");
+$('table:first td[colspan]').css("color", "red");
+$('table:first td[rowspan]').css("font-size", "200%");
+$('table:eq(2) td').html("<div>текст у клітинці</div>");
+$('table:eq(2)').css("background-color", "blue");
+$('table:eq(2) tr:nth-child(3n)').css("font-style", "Italic");
+$('table:eq(2) tr:gt(2)').css("text-transform", "uppercase");
+$('table:eq(3) tr:first td').html("<pre>текст у клітинці</pre>");
+$('table:eq(3) tr:first td:odd').css("color", "green");
+$('table:eq(3) tr:first td:eq(2)').html("<pre>текст у клітинці</pre><hr>");
+$('table:eq(3) tr:last td:eq(0)').html("<ul><li>1 рядок</li><li>2 рядок</li><li>3 рядок</li><li>4 рядок</li></ul>");
+$('table:eq(3) tr:last td:eq(0) ul li').each(function () { alert($(this).text()); });
